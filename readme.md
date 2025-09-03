@@ -21,12 +21,24 @@
 ## 🚀 Installation via Chrome Web Store
 
 <a href="https://chromewebstore.google.com/detail/outlook-web-copy-link/apfgdjfahgmocjbiiackcfhilgpcjgoe?hl=de&authuser=1">
-  <img src="images/chrome_web_store.png" alt="Install from Chrome Web Store" width="260"/>
+  <img src="icons/chrome_web_store.png" alt="Install from Chrome Web Store" width="260"/>
 </a>
 
 
 ## 🔥 Usage 
+Replace in the bookmarks:
 
-This addon will create a buttons in your Outlook web app.
+```https://x.com```
 
-If you click on it, it will create a unique url / link to this specific email. **The email can only be accessed by you !!**
+with
+
+```javascript:window.postMessage({type:'REOPEN_REQUEST',url:'https://x.com'},'*')```
+
+#### 💪 Pro Tip
+1. go to [Bookmarks](chrome://bookmarks/)
+2. Export bookmarks (top right ...)
+3. Open in Text Editor
+4. Replace old urls with new urls,this will keep the original icons !!!
+Example:
+```<DT><A HREF="https://mail.google.com/mail/u/0/#inbox" ADD_DATE="1726411430" ICON="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACGUlEQVR4nKRTPWhTURT+zv1J0j+rLYGCQRAz2KChKk0Lih38od3ciuLioFACDt3csuggiGKhYBXcHASdjEN1aKWUmupWEDGFgh2E19RqEp..."></A>
+```
