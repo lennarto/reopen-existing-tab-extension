@@ -6,8 +6,8 @@
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="icons/icon-512.png" width="300">
-  <source media="(prefers-color-scheme: light)" srcset="images/logo_light.svg" width="300">
+  <source media="(prefers-color-scheme: dark)" srcset="icons/icon-512.png" width="100">
+  <source media="(prefers-color-scheme: light)" srcset="images/logo_light.svg" width="100">
   <img alt="Fallback image description" src="icons/icon-512.png" width="300">
 </picture>
 </div>
