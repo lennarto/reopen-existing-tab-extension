@@ -34,7 +34,7 @@ with
 
 ```javascript:window.postMessage({type:'REOPEN_REQUEST',url:'https://x.com'},'*')```
 
-#### 💪 Pro Tip
+### 💪 Pro Tip
 1. go to [Bookmarks](chrome://bookmarks/)
 2. Export bookmarks (top right ...)
 3. Open in Text Editor
