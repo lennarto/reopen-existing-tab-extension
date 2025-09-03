@@ -1,27 +1,24 @@
 (async () => {
-  const ui = (msg) => (document.getElementById("status").textContent = msg);
+  const ui = (m) => (document.getElementById("status").textContent = m);
   try {
     const [active] = await chrome.tabs.query({ active: true, currentWindow: true });
     const u = active?.url || "";
     if (!u) { ui("No active URL"); return; }
 
-    // Bookmarklet that talks to the bridge (works everywhere)
-    const bookmarklet =
-      "javascript:window.dispatchEvent(new CustomEvent('REOPEN_REQUEST',{detail:'" +
-      u.replace(/'/g, "\\'") +
-      "'}))";
+    // Bookmarklet that talks to bridge.js via postMessage
+    const b = "javascript:window.postMessage({type:'REOPEN_REQUEST',url:'" +
+              u.replace(/'/g, "\\'") + "'},'*')";
 
-    // try modern clipboard
     try {
-      await navigator.clipboard.writeText(bookmarklet);
-      ui("Copied reopen URL ✅");
+      await navigator.clipboard.writeText(b);
+      ui("   Copied reopen URL");
       setTimeout(() => window.close(), 800);
       return;
     } catch {}
 
-    // fallback
+    // Fallback copy path
     const ta = document.createElement("textarea");
-    ta.value = bookmarklet;
+    ta.value = b;
     ta.style.position = "fixed";
     ta.style.opacity = "0";
     document.body.appendChild(ta);
@@ -30,7 +27,7 @@
     ta.remove();
 
     if (ok) {
-      ui("Copied reopen URL ✅");
+      ui("   Copied reopen URL");
       setTimeout(() => window.close(), 800);
     } else {
       ui("Copy manually (⌘C) ↓");
@@ -38,11 +35,11 @@
       pre.readOnly = true;
       pre.style.width = "420px";
       pre.style.height = "120px";
-      pre.value = bookmarklet;
+      pre.value = b;
       document.body.appendChild(pre);
     }
   } catch (e) {
     console.error(e);
-    ui("Copy failed ❌");
+    ui(" Copy failed ❌");
   }
 })();

@@ -1,4 +1,4 @@
-console.debug("[reopen] service worker loaded");
+console.log("[reopen] service worker loaded");
 
 function normalize(input) {
   let s = (input || "").trim();
@@ -30,7 +30,7 @@ function scoreTab(tabUrl, target) {
 }
 
 async function reopenCore(input) {
-  console.debug("[reopen] reopenCore input:", input);
+  console.log("[reopen] reopenCore input:", input);
   const target = normalize(input);
   const tabs = await chrome.tabs.query({});
   let best = null, bestScore = -1;
@@ -50,18 +50,46 @@ async function reopenCore(input) {
   await chrome.tabs.create({ url: urlToOpen });
 }
 
+// page/content-script → background message
 chrome.runtime.onMessage.addListener((msg) => {
-  if (msg?.action === "reopen") {
-    console.debug("[reopen] background got message:", msg);
-    reopenCore(msg.url || "");
+  if (msg?.type === "REOPEN_REQUEST" && msg.url) {
+    console.log("[reopen] background got message:", msg);
+    reopenCore(msg.url);
   }
 });
 
-chrome.omnibox.onInputEntered.addListener((text) => {
-  if (text && text.trim()) reopenCore(text);
-});
-
-// Optional: if you ever remove the popup, clicking the icon will still do something useful
+// Optional: if you ever remove the popup, clicking the icon still does something useful
 chrome.action.onClicked?.addListener(async (tab) => {
   if (tab?.url) reopenCore(tab.url);
+});
+
+// --- ensure bridge is present on existing tabs (content_scripts only run on future navigations) ---
+async function ensureBridgeInjected(tabId) {
+  try {
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      world: 'ISOLATED',
+      func: () => {
+        if (window.__REOPEN_BRIDGE__) return;
+        window.__REOPEN_BRIDGE__ = true;
+        window.addEventListener("message", (e) => {
+          if (e.source !== window) return;
+          if (!e.data || e.data.type !== "REOPEN_REQUEST") return;
+          const url = String(e.data.url || "").trim();
+          if (url) chrome.runtime.sendMessage({ type: "REOPEN_REQUEST", url });
+        });
+      }
+    });
+  } catch (e) {
+    // ignore tabs we cannot inject into (chrome://, extension pages, etc.)
+  }
+}
+// inject into all existing tabs on install/reload
+chrome.runtime.onInstalled.addListener(async () => {
+  const tabs = await chrome.tabs.query({});
+  for (const t of tabs) if (t.id != null) ensureBridgeInjected(t.id);
+});
+// also try when a tab finishes loading
+chrome.tabs.onUpdated.addListener((tabId, info) => {
+  if (info.status === 'complete') ensureBridgeInjected(tabId);
 });
