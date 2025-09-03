@@ -35,7 +35,7 @@ with
 ```javascript:window.postMessage({type:'REOPEN_REQUEST',url:'https://x.com'},'*')```
 
 ### 💪 Pro Tip
-1. go to [Bookmarks](chrome://bookmarks/)
+1. go to Bookmarks chrome://bookmarks
 2. Export bookmarks (top right ...)
 3. Open in Text Editor
 4. Replace old urls with new urls, **</b>this will keep the original icons !!!**
