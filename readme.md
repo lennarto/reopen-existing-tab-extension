@@ -38,7 +38,12 @@ with
 1. go to [Bookmarks](chrome://bookmarks/)
 2. Export bookmarks (top right ...)
 3. Open in Text Editor
-4. Replace old urls with new urls,this will keep the original icons !!!
-Example:
-```<DT><A HREF="https://mail.google.com/mail/u/0/#inbox" ADD_DATE="1726411430" ICON="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACGUlEQVR4nKRTPWhTURT+zv1J0j+rLYGCQRAz2KChKk0Lih38od3ciuLioFACDt3csuggiGKhYBXcHASdjEN1aKWUmupWEDGFgh2E19RqEp..."></A>
-```
+4. Replace old urls with new urls, **</b>this will keep the original icons !!!**
+
+Example: Replace ...
+
+```<DT><A HREF="https://mail.google.com/mail/u/0/#inbox" ADD_DATE="1726411430" ICON="data:image/png;base64,iVBORw0KGgoAAA ..."></A>```
+
+... with ... 
+
+```<DT><A HREF="javascript:window.postMessage({type:'REOPEN_REQUEST',url:'https://mail.google.com/mail/u/0/#inbox'},'*')" ADD_DATE="1726411430" ICON="data:image/png;base64,iVBORw0KGgoAAA ..."></A>```
