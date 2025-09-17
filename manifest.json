@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Reopen Bridge",
-  "version": "1.0.6",
-  "description": "Focus an existing tab by host/path or open a new one.",
+  "name": "Reopen existing Tab",
+  "version": "1.0.9",
+  "description": "Simple Chrome Addon to (re)open a specific URL via bookmark. If no such tab exists, it opens a new one.",
   "permissions": ["tabs", "clipboardWrite", "scripting"],
   "host_permissions": ["<all_urls>"],
   "background": { "service_worker": "background.js" },

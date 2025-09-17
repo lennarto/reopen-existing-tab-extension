@@ -20,10 +20,12 @@
 
 ## 🚀 Installation via Chrome Web Store
 
-<a href="https://chromewebstore.google.com/detail/outlook-web-copy-link/apfgdjfahgmocjbiiackcfhilgpcjgoe?hl=de&authuser=1">
-  <img src="icons/chrome_web_store.png" alt="Install from Chrome Web Store" width="260"/>
+<a href="https://chromewebstore.google.com/detail/reopen-existing-tab/kacfhpoomllknnnkabeimpnkapcofmlk">
+  <img src="icons/chrome_web_store.png" alt="Install from Chrome Web Store" width="210"/>
 </a>
 
+- Option 1: Install directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/reopen-existing-tab/kacfhpoomllknnnkabeimpnkapcofmlk)
+- Option 2: Download this repository and load it as an unpacked extension in Chrome.
 
 ## 🔥 Usage 
 Replace in the bookmarks:
@@ -49,3 +51,19 @@ Example: Replace ...
 ```<DT><A HREF="javascript:window.postMessage({type:'REOPEN_REQUEST',url:'https://mail.google.com/mail/u/0/#inbox'},'*')" ADD_DATE="1726411430" ICON="data:image/png;base64,iVBORw0KGgoAAA ..."></A>```
 
 5. Import bookmarks (top right ... same page as export ...)
+
+
+## 💙 Support 
+
+#### 🐞  Found a bug? Missing a specific feature?
+Feel free to file a new <a href="https://github.com/lennarto/reopen-existing-tab-extension/issues" target="_blank">Issue</a>.
+
+#### 🤝 Contact me
+I love building digital products, working in it-strategy, or applying ai in real-world use cases. On top of that, i create private it expert reports (🇩🇪 IT-Gutachten) for legal proceedings in germany, especially in criminal cases.
+👉 [My website](https://lennie.de) 👈
+
+
+#### 🍻 Buy me a beer 
+
+If you’ve found something useful, feel free to fuel my next project with a Beer! 🍻 I do have a couple of cool ideas in my backlog 🚀
+👉 [My Paypal](https://www.paypal.com/paypalme/ltoertzen) | [Ko-Fi](https://ko-fi.com/lennie) 👈
